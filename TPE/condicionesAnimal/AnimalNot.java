@@ -12,11 +12,6 @@ import TPE.Animal;
  */
 public class AnimalNot extends CondicionAnimal{
     private CondicionAnimal cond;
-
-    public AnimalNot(CondicionAnimal cond, String retorno) {
-        super(retorno);
-        this.cond = cond;
-    }
     
     public AnimalNot(CondicionAnimal cond) {
         this.cond = cond;

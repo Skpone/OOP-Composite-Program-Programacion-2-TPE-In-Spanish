@@ -13,11 +13,6 @@ import TPE.Animal;
 public class SexoAnimal extends CondicionAnimal{
     private String sexo;
 
-    public SexoAnimal(String retorno,String sexo) {
-        super(retorno);
-        this.setSexo(sexo);
-    }
-
     public SexoAnimal(String sexo) {
         super();
         this.setSexo(sexo);

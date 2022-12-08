@@ -14,12 +14,6 @@ public class AnimalOr extends CondicionAnimal{
     private CondicionAnimal cond1;
     private CondicionAnimal cond2;
 
-    public AnimalOr(CondicionAnimal cond1, CondicionAnimal cond2, String retorno) {
-        super(retorno);
-        this.cond1 = cond1;
-        this.cond2 = cond2;
-    }
-
     public AnimalOr(CondicionAnimal cond1, CondicionAnimal cond2) {
         this.cond1 = cond1;
         this.cond2 = cond2;

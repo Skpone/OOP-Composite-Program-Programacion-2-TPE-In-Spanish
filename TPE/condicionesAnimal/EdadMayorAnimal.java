@@ -17,11 +17,6 @@ public class EdadMayorAnimal extends CondicionAnimal{
         super();
         this.edad = edad;
     }
-    
-    public EdadMayorAnimal(String retorno, int edad){
-        super(retorno);
-        this.edad = edad;
-    }
 
     public int getEdad() {
         return edad;

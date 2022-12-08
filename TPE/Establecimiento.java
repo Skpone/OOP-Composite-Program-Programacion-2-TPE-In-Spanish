@@ -1,7 +1,5 @@
 package TPE;
 
-import TPE.condicionesAnimal.TrueAnimal;
-import TPE.condicionesAnimal.CondicionAnimal;
 import TPE.condicionesEstablecimiento.CondicionEstablecimiento;
 import java.util.ArrayList;
 
@@ -31,11 +29,8 @@ public class Establecimiento extends ElementoHacienda {
         return elementos.remove(e);
     }
     
-    // A PESAR de que su estructura sea igual a la funcion "pesoPromedio", no tengo manera de abstraerla, 
-    // si quiero abstraerla debería agregar un String "promedio" (promedio de qué) y hacer ifs x cada posible conbinación,
-    // cosa que no es orientada a objetos.
-    public double edadPromedio(CondicionAnimal c) {
-        ArrayList<Animal> listaAnimales = this.obtenerAnimales(c);
+    public double getPromedioEdad() {
+        ArrayList<Animal> listaAnimales = this.obtenerAnimales();
         double suma = 0.0;
         for (Animal a : listaAnimales) {
             suma += a.getEdad();
@@ -45,25 +40,8 @@ public class Establecimiento extends ElementoHacienda {
         return promedio;
     }
     
-    public double pesoPromedio(CondicionAnimal c) {
-        ArrayList<Animal> listaAnimales = this.obtenerAnimales(c);
-        double suma = 0.0;
-        for (Animal a : listaAnimales) {
-            suma += a.getPeso();
-        }
-        double promedio = suma / listaAnimales.size();
-
-        return promedio;
-    }
-    
-    public double edadPromedio() {
-        CondicionAnimal c = new TrueAnimal(); //mas rapido
-        return this.edadPromedio(c);
-    }
-
-    public double pesoPromedio() {
-        CondicionAnimal c = new TrueAnimal(); //mas rapido
-        return this.pesoPromedio(c);
+    public double getPromedioPeso() {
+        return this.getPeso()/this.cantidadAnimales();
     }
 
     public boolean sePuedeVender(CondicionEstablecimiento c) {
@@ -107,19 +85,19 @@ public class Establecimiento extends ElementoHacienda {
     }
 
     @Override
-    public double pesoTotal() {
+    public double getPeso() {
         double pesoTotal = 0.0;
         for (ElementoHacienda e : elementos) {
-            pesoTotal += e.pesoTotal();
+            pesoTotal += e.getPeso();
         }
         return pesoTotal;
     }
 
     @Override
-    public ArrayList<Animal> obtenerAnimales(CondicionAnimal c) {
+    public ArrayList<Animal> obtenerAnimales() {
         ArrayList<Animal> resultado = new ArrayList<>();
         for (ElementoHacienda e : elementos) {
-            resultado.addAll(e.obtenerAnimales(c));
+            resultado.addAll(e.obtenerAnimales());
         }
         return resultado;
     }

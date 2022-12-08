@@ -12,24 +12,24 @@ import java.util.ArrayList;
  * @author mulat
  */
 public class Clasificador {
-    private ArrayList<CondicionAnimal> condicionesCategorizadoras;//condiciones para clasificar a un animal
+    private ArrayList<Categoria> categorias;
 
     public Clasificador() {
-        this.condicionesCategorizadoras = new ArrayList<>();
+        this.categorias = new ArrayList<>();
     }
     
-    public boolean addCategoria(CondicionAnimal c){
-        return condicionesCategorizadoras.add(c);
+    public boolean addCategoria(Categoria c){
+        return categorias.add(c);
     }
     
-    public boolean removeCategoria(CondicionAnimal c){
-        return condicionesCategorizadoras.remove(c);
+    public boolean removeCategoria(Categoria c){
+        return categorias.remove(c);
     }
     
     public String categorizar(Animal a){
         String resultado = "";
-        for(int i=0; i<condicionesCategorizadoras.size(); i++){
-            String nombre = condicionesCategorizadoras.get(i).categorizar(a);
+        for(int i=0; i<categorias.size(); i++){
+            String nombre = categorias.get(i).categorizar(a);
             if(!nombre.equals("")){
                 if(!resultado.equals(""))
                     resultado = resultado+"-"+nombre;

@@ -14,7 +14,6 @@ import TPE.condicionesAnimal.ParioAnimal;
 import TPE.condicionesAnimal.PesoMayorAnimal;
 import TPE.condicionesAnimal.RazaAnimal;
 import TPE.condicionesAnimal.SexoAnimal;
-import TPE.condicionesAnimal.TrueAnimal;
 import TPE.condicionesEstablecimiento.EstablecimientoOr;
 import TPE.condicionesEstablecimiento.PromedioEdadMayor;
 import TPE.condicionesEstablecimiento.PromedioPesoMayor;
@@ -69,16 +68,14 @@ public class Main {
         System.out.println(haciendaJonny.cantidadAnimales()); //2
         
         //2 obtener promedio de edad de todos los animales del establecimiento
-        System.out.println(haciendaJonny.edadPromedio()); //retorna 6.0 (juansito tiene 3 y francisca tiene 9(meses))dividivo 2
-        System.out.println(empresaLaRural.edadPromedio(new RazaAnimal("holstein")));//juansito e irene son holstein (400.5, 105.3)/2 = 26.5
+        System.out.println(haciendaJonny.getPromedioEdad()); //retorna 6.0 (juansito tiene 3 y francisca tiene 9(meses))dividivo 2
         
         //3 obtener el peso total de un establecimiento
-        System.out.println(empresaLaRural.pesoTotal());
-        System.out.println(rodeoXV.pesoTotal()); //(irene = 400.5, franchesca = 1200.3, juansito = 105.3 y francisca = 70.23) = 1776.33
+        System.out.println(empresaLaRural.getPeso());
+        System.out.println(rodeoXV.getPeso()); //(irene = 400.5, franchesca = 1200.3, juansito = 105.3 y francisca = 70.23) = 1776.33
         
         //4 obtener promedio de peso de animales en un establecimiento
-        System.out.println(haciendaJonny.pesoPromedio());//(francisca = 70.23 y juansito = 105.3)/2 = 87.765
-        System.out.println(empresaLaRural.pesoPromedio(new CapadoAnimal())); //(franco = 500.4, luciano = 1500.31 y franchesca = 1200.3)/3 = 1067
+        System.out.println(haciendaJonny.getPromedioPeso());//(francisca = 70.23 y juansito = 105.3)/2 = 87.765
         
         //resp a "Es posible consultar si un grupo de animales..."
         //1) Que el promedio del peso de cada animal del grupo sea superior a 650 Kg
@@ -139,25 +136,25 @@ public class Main {
         //condicion1.setEdad(12); si yo hago esto, directamente estoy cambiando el comportamiento y este objeto va a ser usado para x ejemplo definir un novillo, no puedo cambiarlo, a no ser que cree una copia
         
         //1)Lechal. Animales con una edad inferior a los 8 meses
-        ministerio.addCategoria(new AnimalNot(condicion1, "Lechal"));
+        ministerio.addCategoria(new Categoria(new AnimalNot(condicion1), "Lechal"));
         //2)Ternero. Animales con una edad comprendida entre los 8 meses y el año de edad
-        ministerio.addCategoria(new AnimalAnd(condicion1, new AnimalNot(condicion2), "Ternero"));
+        ministerio.addCategoria(new Categoria(new AnimalAnd(condicion1, new AnimalNot(condicion2)), "Ternero"));
         //3)Añojo. Son los animales que tienen entre 12 y 24 meses de edad.
-        ministerio.addCategoria(new AnimalAnd(condicion2, new AnimalNot(condicion3, "Añojo")));
+        ministerio.addCategoria(new Categoria(new AnimalAnd(condicion2, new AnimalNot(condicion3)), "Añojo"));
         //4)Novillo. Animales con una edad comprendida entre los 2 y los 4 años
-        ministerio.addCategoria(new AnimalAnd(condicion3, new AnimalNot(condicion4), "Novillo"));
+        ministerio.addCategoria(new Categoria(new AnimalAnd(condicion3, new AnimalNot(condicion4)), "Novillo"));
         //5)Cebón. Es el macho capado al año de edad que no ha llegado a cumplir los 48 meses
-        ministerio.addCategoria(new AnimalAnd(new AnimalNot(condicion4), condicion5, "Cebón"));
+        ministerio.addCategoria(new Categoria(new AnimalAnd(new AnimalNot(condicion4), condicion5), "Cebón"));
         //6)Vaquillona: hembra mas de 15 meses, que nunca parió un ternero
-        ministerio.addCategoria(new AnimalAnd(new AnimalAnd(new EdadMayorAnimal(15), condicion7), new AnimalNot(condicion6), "Vaquillona"));
+        ministerio.addCategoria(new Categoria(new AnimalAnd(new AnimalAnd(new EdadMayorAnimal(15), condicion7), new AnimalNot(condicion6)), "Vaquillona"));
         //7)Vaca. Vaquillona que ya ha parido un ternero.
-        ministerio.addCategoria(new AnimalAnd(new AnimalAnd(new EdadMayorAnimal(15), condicion7), condicion6, "Vaca"));
+        ministerio.addCategoria(new Categoria(new AnimalAnd(new AnimalAnd(new EdadMayorAnimal(15), condicion7), condicion6), "Vaca"));
         //8)Buey. Ejemplar macho mayor de 48 meses y capado.
-        ministerio.addCategoria(new AnimalAnd(new AnimalAnd(condicion4, condicion5), new AnimalNot(condicion7)/*o new SexoAnimal("macho")*/, "Buey"));
+        ministerio.addCategoria(new Categoria(new AnimalAnd(new AnimalAnd(condicion4, condicion5), new AnimalNot(condicion7)/*o new SexoAnimal("macho")*/), "Buey"));
         //9)Toro. Ejemplar macho que no fue capado.
-        ministerio.addCategoria(new AnimalAnd(new SexoAnimal("macho")/*o new AnimalNot(condicion7)*/, new AnimalNot(condicion5),"Toro"));
-        
-        
+        ministerio.addCategoria(new Categoria(new AnimalAnd(new SexoAnimal("macho")/*o new AnimalNot(condicion7)*/, new AnimalNot(condicion5)),"Toro"));
+
+                
         ArrayList<Animal> todosAnimales = empresaLaRural.obtenerAnimales();
         for(Animal animal:todosAnimales){
             //mostramos cada animal q categoría es (los restantes que quedaron en la empresa)
@@ -168,14 +165,13 @@ public class Main {
         //imaginemos que ahora nuestra empresa desea basar la categorizacion de otras organizaciones o hasta podría suceder q el ministerio cambie sus categorías
         //simplemente consultamos las categorias a otros clasificadores
         Clasificador pepitoONG = new Clasificador();
-        pepitoONG.addCategoria(new AnimalNot(condicion7, "TORO"));// "...Si es Macho es TORO"
-        condicion7.setRetorno("VACA");//si se usa compuesto, no se incluye su retorno :probar: System.out.println(ministerio.categorizar(franchesca));
-        pepitoONG.addCategoria(condicion7);// "...y si es Hembra es VACA"
+        pepitoONG.addCategoria(new Categoria(new AnimalNot(condicion7), "TORO"));// "...Si es Macho es TORO"
+        pepitoONG.addCategoria(new Categoria(condicion7, "VACA"));// "...y si es Hembra es VACA"
         
         for(Animal animal:todosAnimales){
             //mostramos cada animal q categoría es (los restantes que quedaron en la empresa)
             System.out.println(animal+" es: "+pepitoONG.categorizar(animal));
         }
-
+        
     }
 }

@@ -10,30 +10,6 @@ import TPE.Animal;
  *
  * @author mulat
  */
-public abstract class CondicionAnimal { /*condicion sobre un animal, tmb puede tomar el papel de categoría, si es que se la da*/
-    private String retorno;
-
-    public CondicionAnimal(String retorno) {
-        this.retorno = retorno;
-    }
-
-    public CondicionAnimal() {
-        this.retorno = "";
-    }
-    
-    public String getRetorno() {
-        return retorno;
-    }
-
-    public void setRetorno(String retorno) {
-        this.retorno = retorno;
-    }
+public abstract class CondicionAnimal { /*condicion sobre un animal*/
     public abstract boolean cumple(Animal a);
-    
-    public String categorizar(Animal a){
-        if(this.cumple(a)){
-            return retorno;
-        }
-        return "";
-    }
 }

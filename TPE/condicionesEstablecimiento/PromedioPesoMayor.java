@@ -27,7 +27,7 @@ public class PromedioPesoMayor extends CondicionEstablecimiento{
     
     @Override
     public boolean cumple(Establecimiento e) {
-        return e.pesoPromedio()>pesoMinimo;
+        return e.getPromedioPeso()>pesoMinimo;
     }
     
 }

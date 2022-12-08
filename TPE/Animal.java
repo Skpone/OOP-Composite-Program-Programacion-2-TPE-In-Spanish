@@ -43,10 +43,6 @@ public class Animal extends ElementoHacienda {
         this.edad = edad;
     }
 
-    public double getPeso() {
-        return peso;
-    }
-
     public void setPeso(double peso) {
         this.peso = peso;
     }
@@ -92,16 +88,14 @@ public class Animal extends ElementoHacienda {
     }
 
     @Override
-    public double pesoTotal() { //este metodo a pesar de comportarse igual que "getPeso", esta pensado usarse para busqueda de peso en elementos compuestos
-        return this.getPeso();
+    public double getPeso() {
+        return this.peso;
     }
 
     @Override
-    public ArrayList<Animal> obtenerAnimales(CondicionAnimal c) {
+    public ArrayList<Animal> obtenerAnimales() {
         ArrayList<Animal> resultado = new ArrayList<>();
-        if (c.cumple(this)) {
-            resultado.add(this);
-        }
+        resultado.add(this);
         return resultado;
     }
 

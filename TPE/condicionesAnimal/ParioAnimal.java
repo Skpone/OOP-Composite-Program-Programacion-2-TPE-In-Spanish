@@ -16,10 +16,6 @@ public class ParioAnimal extends CondicionAnimal{
         super();
     }
     
-    public ParioAnimal(String retorno) {
-        super(retorno);
-    }
-    
     @Override
     public boolean cumple(Animal a) {
         return a.tieneTernerosParidos();

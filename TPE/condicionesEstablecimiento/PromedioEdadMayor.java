@@ -27,7 +27,7 @@ public class PromedioEdadMayor extends CondicionEstablecimiento{
     
     @Override
     public boolean cumple(Establecimiento e) {
-        return e.edadPromedio()>edadMinima;
+        return e.getPromedioEdad()>edadMinima;
     }
     
 }

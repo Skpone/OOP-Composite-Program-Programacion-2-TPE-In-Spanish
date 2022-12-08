@@ -17,11 +17,6 @@ public class PesoMayorAnimal extends CondicionAnimal{
         /*super() implicito*/
         this.peso = peso;
     }
-    
-    public PesoMayorAnimal(String retorno, double peso) {
-        super(retorno);
-        this.peso = peso;
-    }
 
     public double getPeso() {
         return peso;

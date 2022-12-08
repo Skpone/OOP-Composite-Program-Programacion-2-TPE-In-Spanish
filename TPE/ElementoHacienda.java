@@ -1,7 +1,5 @@
 package TPE;
 
-import TPE.condicionesAnimal.CondicionAnimal;
-import TPE.condicionesAnimal.TrueAnimal;
 import java.util.ArrayList;
 
 /*
@@ -16,14 +14,9 @@ import java.util.ArrayList;
 public abstract class ElementoHacienda {
     public abstract int cantidadAnimales();
     
-    public abstract double pesoTotal();
+    public abstract double getPeso();
     
-    public ArrayList<Animal> obtenerAnimales(){
-        CondicionAnimal c = new TrueAnimal();
-        return this.obtenerAnimales(c); //mas rapido
-    };
-    
-    public abstract ArrayList<Animal> obtenerAnimales(CondicionAnimal c);
+    public abstract ArrayList<Animal> obtenerAnimales();
     
     public abstract ArrayList<Animal> obtenerAnimales(Camion ca, int espacioRestante);
     

@@ -12,10 +12,6 @@ import TPE.Animal;
  */
 public class CapadoAnimal extends CondicionAnimal{
 
-    public CapadoAnimal(String retorno) {
-        super(retorno);
-    }
-
     public CapadoAnimal() {
         super();
     }
